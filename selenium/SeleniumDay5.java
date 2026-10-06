@@ -1,19 +1,18 @@
 package com.training.selenium;
 
+import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.reporters.jq.Main;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class SeleniumDay4 {
+public class SeleniumDay5 {
 	static WebDriver driver;
 	public static void login() throws InterruptedException
 	{
@@ -37,8 +36,8 @@ public class SeleniumDay4 {
 	public static void homepage()
 	{
 		driver.findElement(By.xpath("//a[text()='Home']")).click();
-		driver.findElement(By.id("name")).sendKeys("rani");
-		driver.findElement(By.id("lname")).sendKeys("Rajaaaaaarao");
+		driver.findElement(By.id("name")).sendKeys("Pushpa");
+		driver.findElement(By.id("lname")).sendKeys("Rajarao");
 
 		driver.findElement(By.xpath("//input[@value='female']")).click();
 
@@ -68,30 +67,32 @@ public class SeleniumDay4 {
 		Actions action =new Actions(driver);
 		action.moveToElement(buttonswitch).click().build().perform();
 	}
-	public static void windowalert()
+	public static void windowtab()
 	{
+		WebElement windows=driver.findElement(By.xpath("//a[text()='Windows']"));
+		windows.click();
+		WebElement  newtab=driver.findElement(By.xpath("//button[contains(text(),'Tab')]"));
+		newtab.click();
+		String prentwindow=driver.getWindowHandle();
+		System.out.println(driver.getTitle());
+		Set<String>windowhandles=driver.getWindowHandles();
+		for(String handle:windowhandles)
+		{
+			System.out.println(handle);
+			driver.switchTo().window(handle);
+		}
+		System.out.println(driver.getTitle());
+		driver.findElement(By.name("q")).sendKeys("My Sql notes");
+		driver.switchTo().window(prentwindow);
 		
-		WebElement alert=driver.findElement(By.xpath("//a[text()='Alert']"));
-		alert.click();
-		WebElement windowalert=driver.findElement(By.xpath("//button[text()='Window Alert']"));
-		windowalert.click();
-		driver.switchTo().alert().dismiss();//to dismiss the window popups..
 	}
-	public static void promptalert()
-	{
-		WebElement prompt=driver.findElement(By.xpath("//button[text()='Promt Alert']"));
-		prompt.click();
-		driver.switchTo().alert().sendKeys("pushpa");
-		driver.switchTo().alert().accept();
-	}
-	public static void main(String[] args) throws InterruptedException
-	{
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
 		login();
 		homepage();
 	switchtab();
-	windowalert();
-	promptalert();
-
+	windowtab();
 	}
 
 }
