@@ -28,7 +28,7 @@ WebElement loginbutton =driver.findElement(By.xpath("//button[text()='Login to A
 loginbutton.click();
 Thread.sleep(1000);
 driver.findElement(By.xpath("//a[text()='Home']")).click();
-driver.findElement(By.id("name")).sendKeys("Pushpa latha");
+driver.findElement(By.id("name")).sendKeys("Pushpa");
 driver.findElement(By.id("lname")).sendKeys("Rajarao");
 
 driver.findElement(By.xpath("//input[@value='female']")).click();
